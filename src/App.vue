@@ -1,29 +1,33 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div id="app" :class="mode===0?'bgi':mode===1?'bgi1':'bgi2'" >
     <router-view/>
   </div>
 </template>
-
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { mapState, mapActions } from 'vuex'
+export default {
+  data () {
+    return {
+      url: '@/assets/image/back.jpg'
     }
+  },
+  created () {
+    this.setUser()
+    this.setMode()
+  },
+  methods: {
+    ...mapActions([
+      'setUser',
+      'setMode'
+    ])
+  },
+  computed: {
+    ...mapState({
+      mode: state => state.user.mode
+    })
   }
 }
+</script>
+<style lang="less">
+  @import "./assets/css/common.less";
 </style>
