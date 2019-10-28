@@ -11,13 +11,35 @@
             @keyup.native.enter="list(true)"
           ></el-input>
         </el-col>
-        <el-col :span="5" >
-            <el-cascader  placeholder="请选择文章标签" :options="tag" v-model="form.tagId" :props="props" clearable></el-cascader>
+         <el-col :span="4">
+          <el-input
+            v-model="form.title"
+            placeholder="请输入文章标题"
+            clearable
+            @keyup.native.enter="list(true)"
+          ></el-input>
         </el-col>
-        <el-col :span="5">
-            <el-cascader placeholder="请选择文章类别"  :options="category" v-model="form.categoryId" :props="props" clearable></el-cascader>
+         <el-col :span="4">
+          <el-select clearable v-model="form.categoryId" placeholder="请选择文章类别">
+            <el-option
+              v-for="item in category"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+              clearable
+            ></el-option>
+          </el-select>
         </el-col>
-        <el-col :span="2" >
+        <el-col :span="4">
+          <el-cascader
+            placeholder="请选择文章标签"
+            :options="tag"
+            v-model="form.tagId"
+            :props="props"
+            clearable
+          ></el-cascader>
+        </el-col>
+        <el-col :span="2">
           <el-button type="primary" @click="list(true)" icon="el-icon-search">搜索</el-button>
         </el-col>
       </div>
@@ -30,11 +52,23 @@
         index
         ref="table"
         pagination
-        :operation='operation'
+        :operation="operation"
         :prop="prop"
         :getPage="getPage"
         @on-result-change="callback"
-      ></cherish-table>
+      >
+        <el-table-column show-overflow-tooltip prop="status" label="文章标签" align="center">
+          <template slot-scope="scope">
+            {{scope.row.tagName}}
+          </template>
+        </el-table-column>
+         <el-table-column show-overflow-tooltip prop="status" label="状态" align="center">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.status===1">普通文章</el-tag>
+            <el-tag v-else type="danger">精品文章</el-tag>
+          </template>
+        </el-table-column>
+      </cherish-table>
     </div>
     <modal ref="modal" />
   </div>
@@ -44,7 +78,7 @@ import modal from './modal'
 import top from './top'
 import { data } from './mixins'
 import { article, tag, category } from '@api'
-const { list, del } = article
+const { list, del, changeStatus } = article
 const { all: allTag } = tag
 const { all: allCategory } = category
 export default {
@@ -53,10 +87,11 @@ export default {
     return {
       form: {
         name: '',
-        categoryId: [],
-        tagId: []
+        categoryId: '',
+        tagId: [],
+        title: ''
       },
-      prop: [{ label: 'id', prop: 'id' }, { label: '文章名称', prop: 'name' }],
+      prop: [{ label: 'id', prop: 'id' }, { label: '文章名称', prop: 'name' }, { label: '文章标题', prop: 'title' }, { label: '文章类别', prop: 'categoryName' }],
       getPage: {
         page: 1,
         size: 10,
@@ -64,8 +99,9 @@ export default {
         total: 0
       },
       operation: {
-        width: 200,
+        width: 290,
         data: [
+          { name: '切换状态', type: 'warning', icon: 'el-icon-setting' },
           { name: '编辑', type: 'primary', icon: 'el-icon-edit' },
           { name: '删除', type: 'danger', icon: 'el-icon-delete' }
         ]
@@ -101,14 +137,12 @@ export default {
     async list (flag) {
       if (flag) this.getPage.page = 1
       const { data, total } = await list({ ...this.getPage, ...this.form })
+      data.forEach(({ tagName }) => tagName = tagName.split(','))
       this.getPage = { ...this.getPage, data, total }
       this.$refs.table.hideLoading()
     },
     // table回调
     callback (type, { type: types, data, page, size }) {
-      console.log(type)
-      console.log(page)
-      console.log(size)
       switch (type) {
         case 'page':
           this.getPage = { ...this.getPage, size, page }
@@ -117,15 +151,25 @@ export default {
         case 'operation':
           if (types === '编辑') return this.modal(data.id)
           else if (types === '删除') return this.del(data.id)
+          else if (types === '切换状态') return this.change(data)
       }
+    },
+    // 切换文章状态
+    async change ({ id, status }) {
+      await changeStatus({ id, status: status === 1 ? 2 : 1 })
+      this.list()
     },
     // 删除文章分类
     async del (id) {
-      if (!await this.$confirm('此操作将删除该文章, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).catch(_ => false)) return
+      if (
+        !(await this.$confirm('此操作将删除该文章, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).catch(_ => false))
+      ) {
+        return
+      }
       await del(id)
       this.list()
     }

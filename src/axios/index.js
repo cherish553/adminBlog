@@ -2,7 +2,6 @@ import axios from 'axios'
 import Cookie from '@common/cookie'
 import { Message, Loading } from 'element-ui'
 // import Qs from 'qs'
-// import { getToken } from '@/common'
 
 // 提示错误信息
 const log = type => message => Message({
@@ -13,9 +12,8 @@ const log = type => message => Message({
 const errorLog = log('error')
 const successLog = log('success')
 let loading
-// process.env.NODE_ENV === 'development' ? axios.defaults.baseURL = `/api` : axios.defaults.baseURL = process.env.VUE_APP_BaseUrl
-axios.defaults.baseURL = `/api`
-// axios.defaults.withCredentials = true
+process.env.NODE_ENV === 'development' ? axios.defaults.baseURL = `/api` : axios.defaults.baseURL = process.env.VUE_APP_BaseUrl
+// axios.defaults.baseURL = `/api`
 // 请求拦截器
 axios.interceptors.request.use(
   config => {

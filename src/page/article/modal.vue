@@ -14,28 +14,33 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="11" >
+        <el-col :span="11">
           <el-form-item label="文章标签" prop="tagId">
             <el-cascader :options="tag" v-model="form.tagId" :props="props" clearable></el-cascader>
           </el-form-item>
         </el-col>
         <el-col :span="11" :offset="2">
           <el-form-item label="文章类别" prop="categoryId">
-            <el-cascader :options="category" v-model="form.categoryId" :props="props" clearable></el-cascader>
+            <el-select v-model="form.categoryId" placeholder="请选择文章类别">
+              <el-option
+                v-for="item in category"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+                clearable
+              ></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-form-item label="文章内容" prop="inner">
-            <mavon-editor v-model="form.inner" ref='md' @imgAdd="imgAdd" @imgDel="imgDel"/>
+            <mavon-editor v-model="form.inner" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" />
           </el-form-item>
         </el-col>
       </el-row>
-      <!-- </el-row> -->
-      <!--  -->
     </el-form>
-    <!-- <tag ref="tag" /> -->
   </cherish-dialog>
 </template>
 <script>
@@ -72,7 +77,7 @@ export default {
       form: {
         name: '',
         title: '',
-        categoryId: [],
+        categoryId: '',
         tagId: [],
         inner: ''
       },
@@ -91,11 +96,9 @@ export default {
       observable.subscribe(this.next, this.err, this.com)
     },
     // 下一步
-    next (res) {
-    },
+    next (res) {},
     // 错误
-    err (res) {
-    },
+    err (res) {},
     // 完成图片上传
     com (res) {
       if (res.code === 614) return this.$message.error('此照片已存在')
@@ -116,8 +119,11 @@ export default {
     },
     // 根据id查询文章详情
     async search () {
-      const { id, categoryId, tagId, ...rest } = await search(this.id)
-      this.form = { ...rest, categoryId: categoryId.split(','), tagId: tagId.split(',') }
+      const { id, tagId, ...rest } = await search(this.id)
+      this.form = {
+        ...rest,
+        tagId: tagId.split(',')
+      }
     },
     // 编辑
     edit (id) {

@@ -13,13 +13,6 @@ module.exports = {
     loaderOptions: {},
     modules: false
   },
-  // css: {
-  //   loaderOptions: {
-  //     sass: {
-  //       data: `@import "@/assets/styles/styles.scss";`
-  //     }
-  //   }
-  // },
   // 请求代理
   devServer: {
     port: '3000',

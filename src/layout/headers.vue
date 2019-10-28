@@ -71,31 +71,3 @@ export default {
   }
 }
 </script>
-<style lang="less">
-.fs{
-  font-size:20px
-}
-.white{
-  color:white
-}
-.floatRight {
-  display: flex;
-  align-items: center;
-  // margin-right: px;
-  float: right;
-}
-.floatLeft {
-  float: left;
-}
-.center {
-  text-align: center;
-}
-.mr20 {
-  margin-right: 20px;
-}
-.dropdownImg{
-  display: block;
-  width: 100px;
-  height: 50px;
-}
-</style>

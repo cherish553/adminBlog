@@ -15,8 +15,6 @@
       @row-click="rowClick"
       @row-dblclick="rowDblclick"
     >
-      <!-- style="width: 100%" -->
-      <!-- :height="height" -->
       <el-table-column :align="align" v-if="select" type="selection" width="55"></el-table-column>
       <el-table-column :align="align" v-if="index" type="index" label="序号" width="100"></el-table-column>
       <el-table-column
