@@ -57,9 +57,10 @@
         :getPage="getPage"
         @on-result-change="callback"
       >
-        <el-table-column show-overflow-tooltip prop="status" label="文章标签" align="center">
+        <el-table-column show-overflow-tooltip prop="status" label="文章标签" align="center" width="200">
           <template slot-scope="scope">
-            {{scope.row.tagName}}
+            <el-tag v-for="item in scope.row.tagName" :key="item.tagName">{{item.tagName}}</el-tag>
+            <!-- {{scope.row.tagName}} -->
           </template>
         </el-table-column>
          <el-table-column show-overflow-tooltip prop="status" label="状态" align="center">
@@ -137,7 +138,7 @@ export default {
     async list (flag) {
       if (flag) this.getPage.page = 1
       const { data, total } = await list({ ...this.getPage, ...this.form })
-      data.forEach(({ tagName }) => tagName = tagName.split(','))
+      console.log(data.map(item => new Date(item.updateTime).getTime()))
       this.getPage = { ...this.getPage, data, total }
       this.$refs.table.hideLoading()
     },
