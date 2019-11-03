@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Cookie from '@common/cookie'
 import { Message, Loading } from 'element-ui'
+import router from '@/router'
 // import Qs from 'qs'
 
 // 提示错误信息
@@ -42,7 +43,6 @@ axios.interceptors.request.use(
   // },
   // error => Promise.reject(error)
 )
-
 // 响应拦截器
 axios.interceptors.response.use(
   response => {
@@ -53,6 +53,8 @@ axios.interceptors.response.use(
         if (res.message) successLog(res.message)
         return res.data
       default:
+        Cookie.delCookie('token')
+        router.replace({ name: 'login' })
         errorLog(res.message)
         return null
     }

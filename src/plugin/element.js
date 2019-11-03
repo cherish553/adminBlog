@@ -1,5 +1,5 @@
 import {
-  Pagination, Tag, MessageBox,
+  Pagination, Tag, MessageBox, Row,
   Card, Form, FormItem, Input, Message, Button, Container, Header, Dropdown, DropdownMenu, DropdownItem, Popover, Aside, Menu, MenuItem, Main, Col, Select, Cascader, Table, TableColumn, Footer, Dialog, Loading, Option
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -11,6 +11,7 @@ export default {
     Vue.use(Pagination)
       .use(Card)
       .use(Form)
+      .use(Row)
       .use(FormItem)
       .use(Input)
       .use(Button)

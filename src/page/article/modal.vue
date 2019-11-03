@@ -102,7 +102,7 @@ export default {
     // 完成图片上传
     com (res) {
       if (res.code === 614) return this.$message.error('此照片已存在')
-      this.$refs.md.$img2Url(this.pos, `http://${this.$url}${res.key}`)
+      this.$refs.md.$img2Url(this.pos, `${this.$url}${res.key}`)
       this.$message.success('上传成功')
     },
     // 获取上传的token
@@ -119,10 +119,11 @@ export default {
     },
     // 根据id查询文章详情
     async search () {
-      const { id, tagId, ...rest } = await search(this.id)
+      const { id, tagName, ...rest } = await search(this.id)
+      const tagId = tagName.map(item => item.tagId)
       this.form = {
         ...rest,
-        tagId: tagId.split(',')
+        tagId
       }
     },
     // 编辑

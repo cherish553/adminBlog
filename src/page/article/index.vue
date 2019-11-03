@@ -11,7 +11,7 @@
             @keyup.native.enter="list(true)"
           ></el-input>
         </el-col>
-         <el-col :span="4">
+        <el-col :span="4">
           <el-input
             v-model="form.title"
             placeholder="请输入文章标题"
@@ -19,7 +19,7 @@
             @keyup.native.enter="list(true)"
           ></el-input>
         </el-col>
-         <el-col :span="4">
+        <el-col :span="4">
           <el-select clearable v-model="form.categoryId" placeholder="请选择文章类别">
             <el-option
               v-for="item in category"
@@ -57,13 +57,19 @@
         :getPage="getPage"
         @on-result-change="callback"
       >
-        <el-table-column show-overflow-tooltip prop="status" label="文章标签" align="center" width="200">
+        <el-table-column
+          show-overflow-tooltip
+          prop="status"
+          label="文章标签"
+          align="center"
+          width="200"
+        >
           <template slot-scope="scope">
             <el-tag v-for="item in scope.row.tagName" :key="item.tagName">{{item.tagName}}</el-tag>
             <!-- {{scope.row.tagName}} -->
           </template>
         </el-table-column>
-         <el-table-column show-overflow-tooltip prop="status" label="状态" align="center">
+        <el-table-column show-overflow-tooltip prop="status" label="状态" align="center">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.status===1">普通文章</el-tag>
             <el-tag v-else type="danger">精品文章</el-tag>
@@ -92,7 +98,12 @@ export default {
         tagId: [],
         title: ''
       },
-      prop: [{ label: 'id', prop: 'id' }, { label: '文章名称', prop: 'name' }, { label: '文章标题', prop: 'title' }, { label: '文章类别', prop: 'categoryName' }],
+      prop: [
+        { label: 'id', prop: 'id' },
+        { label: '文章名称', prop: 'name' },
+        { label: '文章标题', prop: 'title' },
+        { label: '文章类别', prop: 'categoryName' }
+      ],
       getPage: {
         page: 1,
         size: 10,
@@ -137,8 +148,8 @@ export default {
     // 获取文章类别
     async list (flag) {
       if (flag) this.getPage.page = 1
-      const { data, total } = await list({ ...this.getPage, ...this.form })
-      console.log(data.map(item => new Date(item.updateTime).getTime()))
+      const { page, size } = this.getPage
+      const { data, total } = await list({ page, size, ...this.form })
       this.getPage = { ...this.getPage, data, total }
       this.$refs.table.hideLoading()
     },
