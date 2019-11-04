@@ -36,6 +36,13 @@ module.exports = {
         '@img': '@/assets/image',
         '@page': '@/page'
       }
+    },
+
+    externals: {
+      'vue': 'Vue',
+      'vue-router': 'VueRouter',
+      'element-ui': 'ELEMENT',
+      'vuex': 'Vuex'
     }
   }
 }

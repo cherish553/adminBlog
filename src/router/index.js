@@ -1,9 +1,9 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './router'
 import cookie from '@common/cookie'
 const { getCookie } = cookie
-Vue.use(Router)
+// Vue.use(Router)
 
 const router = new Router({
   routes: [

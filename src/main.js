@@ -3,13 +3,17 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import cookie from 'js-cookie'
-import element from '@plugin/element'
+// import element from '@plugin/element'
 import mavonEditor from '@plugin/mavonEditer'
 import common from '@common'
 import components from '@/components'
+import ELEMENT from 'element-ui'
+import { sync } from 'vuex-router-sync'
+sync(store, router)
+Vue.use(ELEMENT)
 Vue.config.productionTip = false
 Vue.use(cookie)
-  .use(element)
+  // .use(element)
   .use(common)
   .use(mavonEditor)
   .use(components)
