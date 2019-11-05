@@ -10,9 +10,9 @@ import components from '@/components'
 import ELEMENT from 'element-ui'
 import { sync } from 'vuex-router-sync'
 sync(store, router)
-Vue.use(ELEMENT)
 Vue.config.productionTip = false
 Vue.use(cookie)
+  .use(ELEMENT)
   // .use(element)
   .use(common)
   .use(mavonEditor)

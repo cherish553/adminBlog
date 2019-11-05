@@ -1,17 +1,17 @@
 import axios from 'axios'
 import Cookie from '@common/cookie'
-import { Message, Loading } from 'element-ui'
+// import { Message, Loading } from 'element-ui'
 import router from '@/router'
 // import Qs from 'qs'
 
 // 提示错误信息
-const log = type => message => Message({
-  message,
-  type,
-  duration: 5 * 1000
-})
-const errorLog = log('error')
-const successLog = log('success')
+// const log = type => message => Message({
+//   message,
+//   type,
+//   duration: 5 * 1000
+// })
+// const errorLog = log('error')
+// const successLog = log('success')
 let loading
 process.env.NODE_ENV === 'development' ? axios.defaults.baseURL = `/api` : axios.defaults.baseURL = process.env.VUE_APP_BaseUrl
 // axios.defaults.baseURL = `/api`
@@ -19,12 +19,12 @@ process.env.NODE_ENV === 'development' ? axios.defaults.baseURL = `/api` : axios
 axios.interceptors.request.use(
   config => {
     if (Cookie.getCookie('token')) config.headers['token'] = Cookie.getCookie('token')
-    loading = Loading.service({
-      lock: true,
-      text: 'Loading',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-    })
+    // loading = Loading.service({
+    //   lock: true,
+    //   text: 'Loading',
+    //   spinner: 'el-icon-loading',
+    //   background: 'rgba(0, 0, 0, 0.7)'
+    // })
     return config
   }
   // config => {
@@ -50,12 +50,12 @@ axios.interceptors.response.use(
     const res = response.data
     switch (res.code) {
       case 0:
-        if (res.message) successLog(res.message)
+        // if (res.message) successLog(res.message)
         return res.data
       default:
         Cookie.delCookie('token')
         router.replace({ name: 'login' })
-        errorLog(res.message)
+        // errorLog(res.message)
         return null
     }
   },
