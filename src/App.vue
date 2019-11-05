@@ -6,11 +6,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-  data () {
-    return {
-      url: '@/assets/image/back.jpg'
-    }
-  },
   created () {
     this.setUser()
     this.setMode()

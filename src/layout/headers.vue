@@ -8,9 +8,9 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="changeMode(0)"><img class="dropdownImg" src="../assets/image/back.jpg" alt=""></el-dropdown-item>
-          <el-dropdown-item @click.native="changeMode(1)"><img class="dropdownImg" src="../assets/image/back1.jpg" alt=""></el-dropdown-item>
-          <el-dropdown-item @click.native="changeMode(2)"><img class="dropdownImg" src="../assets/image/back2.jpeg" alt=""></el-dropdown-item>
+          <el-dropdown-item @click.native="changeMode(0)"><img class="dropdownImg" src="http://cdns.cherish553.cn/back.jpg" alt=""></el-dropdown-item>
+          <el-dropdown-item @click.native="changeMode(1)"><img class="dropdownImg" src="http://cdns.cherish553.cn/back1.jpg" alt=""></el-dropdown-item>
+          <el-dropdown-item @click.native="changeMode(2)"><img class="dropdownImg" src="http://cdns.cherish553.cn/back2.jpeg" alt=""></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <i v-if='!full' class="white el-icon-zoom-in fs mr20" @click="fullScreen"></i>

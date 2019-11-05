@@ -42,7 +42,9 @@ module.exports = {
       'vue': 'Vue',
       'vue-router': 'VueRouter',
       'element-ui': 'ELEMENT',
-      'vuex': 'Vuex'
+      'vuex': 'Vuex',
+      'axios': 'axios',
+      'js-cookie': 'js-cookie'
     }
   }
 }
