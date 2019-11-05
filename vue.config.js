@@ -44,7 +44,7 @@ module.exports = {
       'element-ui': 'ELEMENT',
       'vuex': 'Vuex',
       'axios': 'axios',
-      'js-cookie': 'js-cookie'
+      'cookie': 'js-cookie'
     }
   }
 }
