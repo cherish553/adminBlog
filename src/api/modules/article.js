@@ -20,7 +20,7 @@ export default {
     tagId: tagId.join(','),
     ...rest
   }),
-  // 改变文章状态
+  // 改变文章状态/
   changeStatus: _ => http.put(`/${url}/update`, _),
   // 删除文章类别
   del: id => http.delete(`/${url}/del/${id}`)

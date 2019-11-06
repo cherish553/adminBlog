@@ -1,9 +1,7 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
 import cookie from '@common/cookie'
-
-// Vue.use(Vuex)
-
+process.env.NODE_ENV === 'development' ? Vue.use(Vuex) : ''
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   state: {

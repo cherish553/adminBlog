@@ -52,7 +52,9 @@ export default {
         cookie.setCookie('token', token)
         this.setUser()
         this.$jump('article-index')
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+      }
     },
     // 提交表单
     submit (ref) {

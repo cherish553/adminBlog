@@ -1,18 +1,18 @@
 import axios from 'axios'
 import Cookie from '@common/cookie'
-// import { Message, Loading } from 'element-ui'
+import { Message } from 'element-ui'
 import router from '@/router'
 // import Qs from 'qs'
 
 // 提示错误信息
-// const log = type => message => Message({
-//   message,
-//   type,
-//   duration: 5 * 1000
-// })
-// const errorLog = log('error')
-// const successLog = log('success')
-let loading
+const log = type => message => Message({
+  message,
+  type,
+  duration: 5 * 1000
+})
+const errorLog = log('error')
+const successLog = log('success')
+// let loading
 process.env.NODE_ENV === 'development' ? axios.defaults.baseURL = `/api` : axios.defaults.baseURL = process.env.VUE_APP_BaseUrl
 // axios.defaults.baseURL = `/api`
 // 请求拦截器
@@ -46,21 +46,21 @@ axios.interceptors.request.use(
 // 响应拦截器
 axios.interceptors.response.use(
   response => {
-    loading.close()
+    // loading.close()
     const res = response.data
     switch (res.code) {
       case 0:
-        // if (res.message) successLog(res.message)
+        if (res.message) successLog(res.message)
         return res.data
       default:
         Cookie.delCookie('token')
         router.replace({ name: 'login' })
-        // errorLog(res.message)
+        errorLog(res.message)
         return null
     }
   },
   error => {
-    loading.close()
+    // loading.close()
     if (error && error.response) {
       switch (error.response.status) {
         case 400: error.message = '请求错误'; break
