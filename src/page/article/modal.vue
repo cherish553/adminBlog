@@ -140,7 +140,8 @@ export default {
     },
     // 编辑文章
     async update () {
-      if (await update({ ...this.form, id: this.id })) return this.success()
+      const { categoryId, inner, name, tagId, title } = this.form
+      if (await update({ categoryId, inner, name, tagId, title, id: this.id })) return this.success()
     },
     // 添加文章分类
     async add () {
