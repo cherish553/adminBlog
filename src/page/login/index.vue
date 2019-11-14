@@ -9,7 +9,7 @@
           <!-- <el-input @keyup.enter.native="submit('form')" v-model.trim="form.userName"></el-input> -->
         </el-form-item>
         <el-form-item label="密码" prop="passWord">
-          <!-- <el-input @keyup.enter.native="submit('form')" type="password" v-model="form.passWord"></el-input> -->
+          <el-input @keyup.enter.native="submit('form')" type="password" v-model="form.passWord"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submit('form')">确认登录</el-button>
