@@ -22,12 +22,12 @@ export default new Vuex.Store({
   },
   actions: {
     // 保存用户名
-    async setUser ({ commit }) {
+    setUser ({ commit }) {
       const name = cookie.getCookie('name') || ''
       if (name) commit('setUser', name)
     },
     // 改变模式
-    async setMode ({ commit }, e) {
+    setMode ({ commit }, e) {
       if (String(e)) cookie.setCookie('mode', e)
       const mode = parseInt(cookie.getCookie('mode')) || 0
       commit('setMode', mode)
