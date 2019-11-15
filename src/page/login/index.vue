@@ -12,7 +12,7 @@
           <el-input @keyup.enter.native="submit('form')" type="password" v-model="form.passWord"></el-input>
         </el-form-item>
         <el-form-item>
-          <!-- <el-button type="primary" @click="submit('form')">确认登录</el-button> -->
+          <el-button type="primary" @click="submit('form')">确认登录</el-button>
           <!-- <el-button @click="reset('form')">重置</el-button> -->
         </el-form-item>
       </el-form>
