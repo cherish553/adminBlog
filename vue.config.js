@@ -37,7 +37,7 @@ module.exports = {
   // },
   // 请求代理
   devServer: {
-    port: '4000',
+    port: '3000',
     open: true,
     https: false,
     proxy: {
