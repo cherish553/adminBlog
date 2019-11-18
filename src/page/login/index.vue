@@ -2,11 +2,11 @@
   <div class="w100 h100 flexCenter">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <!-- <h2 class="center white">李可凡个人博客管理后台</h2> -->
+        <h2 class="center white">李可凡个人博客管理后台</h2>
       </div>
       <el-form class="whiteLabel" :rules="rules" :model="form" ref="form" label-width="70px">
         <el-form-item label="用户名" prop="userName">
-          <!-- <el-input @keyup.enter.native="submit('form')" v-model.trim="form.userName"></el-input> -->
+          <el-input @keyup.enter.native="submit('form')" v-model.trim="form.userName"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="passWord">
           <el-input @keyup.enter.native="submit('form')" type="password" v-model="form.passWord"></el-input>
