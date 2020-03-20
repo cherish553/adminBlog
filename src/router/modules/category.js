@@ -8,7 +8,7 @@ const category = {
     // 门店管理
     // { path: 'shopManage', name: `${pre}shop-manage`, component: () => import('@page/category/shopManage'), meta: { title: '门店管理' } },
     // 分类管理
-    { path: 'index', name: `${pre}index`, component: () => import('@page/category'), meta: { title: '文章类别' } }
+    { path: 'index', name: `${pre}index`, component: () => import('@page/category'), meta: { ...meta, title: '文章类别' } }
   ])('category-')
 }
 export default category

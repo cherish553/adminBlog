@@ -6,6 +6,7 @@ const { getCookie } = cookie
 process.env.NODE_ENV === 'development' ? Vue.use(Router) : ''
 
 const router = new Router({
+  mode: history,
   routes: [
     {
       path: '/login',
