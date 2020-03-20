@@ -1,6 +1,6 @@
 module.exports = {
   // 基本URL
-  publicPath: './',
+  publicPath: '/',
   // 静态资源目录
   assetsDir: 'assets',
   // 生产环境的 source map
